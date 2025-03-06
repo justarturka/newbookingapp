@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Globe, Instagram, MessageCircle, CheckCircle, X } from "lucide-react";
 
@@ -59,7 +59,7 @@ const mockData = [
     price: "Средний чек: 15 000 KZT",
     image: "/rest2.jpg",
     description:
-      "Аутентичное заведение с национальной казахской кухней и уникальными ремесленными изделиями.",
+      "Аутентичное заведение с казахской кухней и уникальными ремесленными изделиями.",
     website: "https://sandyq.kz",
     instagram: "https://www.instagram.com/sandyq_restaurant/",
   },
@@ -138,7 +138,8 @@ export default function BookingMVP() {
     setFormError("");
   };
 
-  const handleBookingSubmit = (e) => {
+  // Исправлено: добавлена аннотация типа для параметра e
+  const handleBookingSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!bookingName || !bookingPhone || !bookingDate) {
       setFormError("Пожалуйста, заполните все поля.");
@@ -206,8 +207,8 @@ export default function BookingMVP() {
                 alt={item.name}
                 className="w-full h-40 object-cover mb-2"
                 onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "/placeholder.jpg";
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "/placeholder.jpg";
                 }}
               />
               <h2 className="text-lg font-semibold">{item.name}</h2>
